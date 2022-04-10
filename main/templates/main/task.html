@@ -1,0 +1,27 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Creating a task
+{% endblock %}
+
+{% block header %}
+Creating a task
+{% endblock %}
+
+{% block body %}
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label for="title" class="form-label">Task title</label>
+            {{ form.title }}
+            <dib id="titleHelp", class="form-text"> short name of the task (text limit 100 characters) </dib>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Task description</label>
+            {{ form.description }}
+            <dib id="descriptionHelp", class="form-text"> describe the task (text limit 256 characters) </dib>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+{% endblock %}
