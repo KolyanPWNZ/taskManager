@@ -1,0 +1,55 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Creating a post
+{% endblock %}
+
+{% block header %}
+Creating a post
+{% endblock %}
+
+{% block body %}
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label for="title" class="form-label">Task title</label>
+            {{ form.title }}
+            <dib id="titleHelp", class="form-text"> text limit 100 characters </dib>
+        </div>
+        <div class="mb-3">
+            <label for="posted" class="datetime">Date posted</label>
+            {{ form.posted }}
+            <dib id="titleHelp", class="datetime"> choose date for posted </dib>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    {% if posts %}
+        <table class="table">
+          <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Post</th>
+                <th scope="col">Created</th>
+                <th scope="col">Posted</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for post in posts %}
+            <tr>
+                <th scope="row">1</th>
+                <th scope="row">{{ post.title }}</th>
+                <th scope="row">{{ post.created }}</th>
+                <th scope="row">{{ post.posted }}</th>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+    {% else %}
+        <div class="alert alert-warning" role="alert">
+            <p> You have not posts yet </p>
+        </div>
+    {% endif %}
+{% endblock %}

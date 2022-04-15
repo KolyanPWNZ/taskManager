@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .models import Task
-from .forms import TaskForm
+from .models import Task, Post
+from .forms import TaskForm, PostForm
 
 from rest_framework import viewsets
 from .serializers import TaskSerialiser
@@ -31,6 +31,23 @@ def task(request):
         'form': form
     }
     return render(request, 'main/task.html', context)
+
+
+def post(request):
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            form.save()
+
+    form = PostForm()
+    posts = Post.objects.order_by('-id')
+    context = {
+        'form': form,
+        "title": "Publication",
+        "header": "My publication",
+        "posts": posts,
+    }
+    return render(request, 'main/post.html', context)
 
 
 class TaskViewSet(viewsets.ModelViewSet):
