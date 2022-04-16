@@ -27,26 +27,28 @@ Creating a post
     </form>
 
     {% if posts %}
-        <table class="table">
-          <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Post</th>
-                <th scope="col">Created</th>
-                <th scope="col">Posted</th>
-            </tr>
-          </thead>
-          <tbody>
-          {% for post in posts %}
-            <tr>
-                <th scope="row">1</th>
-                <th scope="row">{{ post.title }}</th>
-                <th scope="row">{{ post.created }}</th>
-                <th scope="row">{{ post.posted }}</th>
-            </tr>
-          {% endfor %}
-          </tbody>
-        </table>
+
+        {% csrf_token %}
+            <table class="table">
+              <thead>
+                <tr>
+                    <th scope="col">Post</th>
+                    <th scope="col">Created</th>
+                    <th scope="col">Posted</th>
+                    <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for post in posts %}
+                    <tr>
+                        <th scope="row" > {{ post.title }}</th>
+                        <th scope="row"> {{ post.created }}</th>
+                        <th scope="row"> {{ post.posted }}</th>
+                    </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+
     {% else %}
         <div class="alert alert-warning" role="alert">
             <p> You have not posts yet </p>

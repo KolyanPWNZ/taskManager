@@ -5,6 +5,8 @@ from .forms import TaskForm, PostForm
 from rest_framework import viewsets
 from .serializers import TaskSerialiser
 
+from django.http import HttpResponseRedirect
+
 
 def index(request):
     tasks = Task.objects.order_by('-id')
@@ -39,6 +41,11 @@ def post(request):
         if form.is_valid():
             form.save()
 
+    if request.method == 'GET':
+        form = PostForm(request.GET)
+        if form.is_valid():
+            print(form)
+
     form = PostForm()
     posts = Post.objects.order_by('-id')
     context = {
@@ -48,6 +55,7 @@ def post(request):
         "posts": posts,
     }
     return render(request, 'main/post.html', context)
+
 
 
 class TaskViewSet(viewsets.ModelViewSet):
