@@ -5,6 +5,7 @@ from rest_framework import routers
 
 router = routers.DefaultRouter()
 router.register(r'tasks', views.TaskViewSet)
+router.register(r'posts', views.PostViewSet)
 
 urlpatterns = [
     path('', views.index, name='home'),

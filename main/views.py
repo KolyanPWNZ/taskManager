@@ -3,7 +3,7 @@ from .models import Task, Post
 from .forms import TaskForm, PostForm
 
 from rest_framework import viewsets
-from .serializers import TaskSerialiser
+from .serializers import TaskSerialiser, PostSerialiser
 
 from django.http import HttpResponseRedirect
 
@@ -61,3 +61,8 @@ def post(request):
 class TaskViewSet(viewsets.ModelViewSet):
     queryset = Task.objects.all()
     serializer_class = TaskSerialiser
+
+
+class PostViewSet(viewsets.ModelViewSet):
+    queryset = Post.objects.all()
+    serializer_class = PostSerialiser
